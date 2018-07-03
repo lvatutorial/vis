@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+  <title>Graph 3D cloud with colored dots</title>
+
+  <style>
+    body {font: 10pt arial;}
+  </style>
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css">
+  <script type="text/javascript" src="../../dist/vis.js"></script>
+  <!--script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script-->
+
+  <script type="text/javascript">
+    var data = null;
+    var graph = null;
+
+    
+    // Called when the Visualization API is loaded.
+    function drawVisualization() {
+      // create the data table.
+      data = new vis.DataSet();
+      
+      var dataArray = [
+        { text: '<b>Image Captioning</b><br><a href="http://nlp.cs.illinois.edu/HockenmaierGroup/Framing_Image_Description/KCCA.html">Flickr 8K dataset</a>, JAIR 2013', 
+          x: 1.5, y: 1.5, z: 0.1, style: 2013, filter:1 },
+        { text: '<b>Image Captioning</b><br><a href="http://shannon.cs.illinois.edu/DenotationGraph/">Flickr 30K dataset</a>, TACL 2014', 
+          x: 1.5, y: 1.5, z: 0.2, style: 2014, filter:2 },
+        { text: '<b>Image Captioning</b><br><a href="http://cocodataset.org/">COCO Captions dataset</a>, 2015', 
+          x: 1.5, y: 1.5, z: 0.3, style: 2015, filter:3 },
+        { text: '<b>Visual Question Answering</b><br><a href="http://www.visualqa.org/">VQA dataset</a>, ICCV 2015', 
+          x: 1.5, y: 1.5, z: 0.4, style: 2015, filter:4 },
+        {text: '<b>Video Question Answering</b><br><a href="http://movieqa.cs.toronto.edu/home/">Movie QA dataset</a>, CVPR 2016', 
+          x: 2.5, y: 1.5, z: 0.1, style: 2016, filter:5 },
+        { text: '<b>Visual Question Answering</b><br><a href="https://cs.stanford.edu/people/jcjohns/clevr/">CLEVR dataset</a>, CVPR 2017', 
+          x: 0.5, y: 0.5, z: 0.1, style: 2017, filter:6 },
+        {text: '<b>Visual Dialog</b><br><a href="https://visualdialog.org/">VisDial dataset</a>, CVPR 2017', 
+          x: 1.5, y: 2.5, z: 0.1, style: 2017, filter:7 },
+        { text: '<b>Vision-and-Language Navigation</b><br><a href="https://bringmeaspoon.org/">Room-to-Room (R2R) dataset</a> (<a href="https://github.com/niessner/Matterport">Matterport3D</a>), CVPR 2018', 
+          x: 2.5, y: 1.5, z: 1.1, style: 2018, filter:8 },
+        { text: '<b>Embodied Question Answering</b><br><a href="https://embodiedqa.org/Interactive Question Answering">Embodied Question Answering dataset</a> (<a href="https://github.com/facebookresearch/House3D">House3D</a> / <a href="http://suncg.cs.princeton.edu/">SUNCG</a>), CVPR 2018', 
+          x: 2.5, y: 0.5, z: 1.1, style: 2018, filter:9 },
+        { text: '<b>Embodied Question Answering</b><br><a href="https://arxiv.org/abs/1712.03316">Interactive Question Answering (IQA) dataset</a> (<a href="https://ai2thor.allenai.org/">AI2-THOR</a>), CVPR 2018', 
+          x: 2.5, y: 0.5, z: 1.2, style: 2018, filter:10 },
+      ]
+      
+      for (var k = 0; k < dataArray.length; k++) {
+        item = dataArray[k];
+        for (var t = item.filter; t <= dataArray.length+1; t++) {
+          data.add([
+            {x:item.x,y:item.y,z:item.z,filter:t,style:item.style,text:item.text,tooltip:t==item.filter}
+          ]);
+        }
+      }
+
+      // specify options
+      var options = {
+        width:  '800px',
+        height: '600px',
+        style: 'dot-color',
+        showPerspective: true,
+        animationInterval: 1000, // milliseconds
+        animationPreload: true,
+        animationAutoStart: true,
+        showGrid: true,
+        keepAspectRatio: true,
+        verticalRatio: 0.66,
+        legendLabel: 'Year',
+        cameraPosition: {
+          horizontal: 0.65,
+          vertical: 0.2,
+          distance: 2.2
+        },
+        filterLabel: 'Evolution of Vision and Language Datasets',
+        dotSizeRatio: 0.05,
+        showShadow: true,
+        xMin: 0,
+        xMax: 3,
+        xStep: 1,
+        xLabel: 'Vision',
+        yMin: 0,
+        yMax: 3,
+        yStep: 1,
+        yLabel: 'Language',
+        zMin: 0,
+        zMax: 3,
+        zStep: 1,
+        zLabel: 'Actions',
+        xValueLabel: function (x) { // vision
+          switch(x) {
+            case 0: return 'Synthetic Images'; break; 
+            case 1: return 'Natural Images'; break; 
+            case 2: return 'Video'; break; 
+          } 
+        },
+        yValueLabel: function (x) { // language
+          switch(x) {
+            case 0: return 'Templates'; break; 
+            case 1: return 'Natural'; break;
+            case 2: return 'Dialog'; break;
+          } 
+        },
+        zValueLabel: function (x) { // actions
+          switch(x) {
+            case 0: return 'None'; break;
+            case 1: return 'Camera Control'; break;
+            case 2: return 'Interaction / Manipulation'; break; 
+          } 
+        },
+        // Option tooltip can be true, false, or a function returning a string with HTML contents
+        tooltip: function (point) {
+          // parameter point contains properties x, y, z, and data
+          // data is the original object passed to the point constructor
+          return point.data.text;
+        },
+  
+        // Tooltip default styling can be overridden
+        tooltipStyle: {
+          content: {
+            background    : 'rgba(255, 255, 255, 0.9)',
+            padding       : '10px',
+            borderRadius  : '10px'
+          },
+          line: {
+            borderLeft    : '1px dotted rgba(0, 0, 0, 0.5)'
+          },
+          dot: {
+            border        : '5px solid rgba(0, 0, 0, 0.5)'
+          }
+        },
+      };
+            
+      // create our graph
+      var container = document.getElementById('mygraph');
+      graph = new vis.Graph3d(container, data, options);
+      
+    }
+  </script>
+</head>
+
+<body onload="drawVisualization()">
+<div id="mygraph"></div>
+
+<div id="info"></div>
+</body>
+</html>
