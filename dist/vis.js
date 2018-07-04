@@ -34833,7 +34833,8 @@ Graph3d.prototype._calcTranslations = function (points) {
     point.screen = this._convertTranslationToScreen(point.trans);
 
     // calculate the translation of the point at the bottom (needed for sorting)
-    var transBottom = this._convertPointToTranslation(point.bottom);
+    var transBottom = this._convertPointToTranslation(point.point);
+    //console.log([point.point, point.bottom, transBottom]);
     point.dist = this.showPerspective ? transBottom.length() : -transBottom.z;
   }
 
@@ -36535,7 +36536,7 @@ Graph3d.prototype._onClick = function (event) {
  * @param {Event}  event   A mouse move event
  */
 Graph3d.prototype._onTooltip = function (event) {
-  return; // hack to disable tooltips on mouse
+  //return; // hack to disable tooltips on mouse
   var delay = 100; // ms
   var boundingRect = this.frame.getBoundingClientRect();
   var mouseX = getMouseX(event) - boundingRect.left;
@@ -36708,7 +36709,7 @@ Graph3d.prototype._insideTriangle = function (point, triangle) {
  */
 Graph3d.prototype._dataPointFromXY = function (x, y) {
   var i,
-      distMax = 100,
+      distMax = 150,
       // px
   dataPoint = null,
       closestDataPoint = null,
@@ -36772,6 +36773,11 @@ Graph3d.prototype.hasBars = function (style) {
  */
 Graph3d.prototype._showTooltip = function (dataPoint) {
   var content, line, dot;
+
+  if (typeof this.showTooltip === 'function' && !this.showTooltip(dataPoint.point)) {
+    // Don't show tooltip if function returns false
+    return;
+  }
 
   if (!this.tooltip) {
     content = document.createElement('div');

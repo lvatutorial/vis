@@ -22,48 +22,87 @@
       data = new vis.DataSet();
       
       var dataArray = [
-        { text: '<b>Image Captioning</b><br><a href="http://nlp.cs.illinois.edu/HockenmaierGroup/Framing_Image_Description/KCCA.html">Flickr 8K dataset</a>, JAIR 2013', 
+        { cat: 'Image Captioning', text:'Flickr 8K dataset', conf:'JAIR 2013',
+          url:'http://nlp.cs.illinois.edu/HockenmaierGroup/Framing_Image_Description/KCCA.html', 
           x: 1.5, y: 1.5, z: 0.1, style: 2013, filter:1 },
-        { text: '<b>Image Captioning</b><br><a href="https://vision.ece.vt.edu/clipart/">Abstract Scenes dataset</a>, CVPR 2013', 
-          x: 0.5, y: 1.5, z: 0.1, style: 2013, filter:2 },
-        { text: '<b>Image Captioning</b><br><a href="http://shannon.cs.illinois.edu/DenotationGraph/">Flickr 30K dataset</a>, TACL 2014', 
+        { cat: 'Image Captioning', text:'Flickr 30K dataset', conf:'TACL 2014',
+          url:'http://shannon.cs.illinois.edu/DenotationGraph/', 
           x: 1.5, y: 1.5, z: 0.2, style: 2014, filter:3 },
-        {text: '<b>Referring Expressions</b><br><a href="http://tamaraberg.com/referitgame/">ReferItGame dataset</a>, EMNLP 2014', 
+        { cat: 'Referring Expressions', text:'ReferItGame dataset', conf:'EMNLP 2014',
+          url:'http://tamaraberg.com/referitgame/',
           x: 1.5, y: 1.5, z: 0.3, style: 2014, filter:4 },
-        { text: '<b>Image Captioning</b><br><a href="http://cocodataset.org/">COCO Captions dataset</a>, 2015', 
+        { cat: 'Image Captioning', text: 'COCO Captions dataset', conf:'2015', 
+          url:'http://cocodataset.org/',
           x: 1.5, y: 1.5, z: 0.4, style: 2015, filter:5 },
-        { text: '<b>Visual Question Answering</b><br><a href="http://www.visualqa.org/">VQA dataset</a>, ICCV 2015', 
+        { cat: 'Visual Question Answering', text:'VQA dataset', conf:'ICCV, 2015', 
+          url: 'http://www.visualqa.org/',
           x: 1.5, y: 1.5, z: 0.5, style: 2015, filter:6 },
-        {text: '<b>Video Description</b><br><a href="https://www.mpi-inf.mpg.de/departments/computer-vision-and-multimodal-computing/research/vision-and-language/mpii-movie-description-dataset/">MPII Movie Description dataset</a>, CVPR 2015', 
-          x: 2.5, y: 1.5, z: 0.1, style: 2015, filter:7 },
-        {text: '<b>Video Question Answering</b><br><a href="http://movieqa.cs.toronto.edu/home/">Movie QA dataset</a>, CVPR 2016', 
-          x: 2.5, y: 1.5, z: 0.2, style: 2016, filter:8 },
-        {text: '<b>Video Description</b><br><a href="https://www.microsoft.com/en-us/research/publication/msr-vtt-a-large-video-description-dataset-for-bridging-video-and-language/">MSR-VTT dataset</a>, CVPR 2016', 
-          x: 2.5, y: 1.5, z: 0.3, style: 2016, filter:9 },
-        {text: '<b>Referring Expressions</b><br><a href="https://github.com/mjhucla/Google_Refexp_toolbox">Google RefExp dataset</a>, CVPR 2016', 
+        { cat: 'Referring Expressions', text: 'Google RefExp dataset', conf:'CVPR 2016',
+          url: 'https://github.com/mjhucla/Google_Refexp_toolbox',  
           x: 1.5, y: 1.5, z: 0.6, style: 2016, filter:10 },
-        { text: '<b>Visual Question Answering</b><br><a href="https://cs.stanford.edu/people/jcjohns/clevr/">CLEVR dataset</a>, CVPR 2017', 
-          x: 0.5, y: 0.5, z: 0.1, style: 2017, filter:11 },
-        {text: '<b>Visual Dialog</b><br><a href="https://visualdialog.org/">VisDial dataset</a>, CVPR 2017', 
-          x: 1.5, y: 2.5, z: 0.1, style: 2017, filter:12 },
-        {text: '<b>Visual Dialog</b><br><a href="https://www.guesswhat.ai/">GuessWhat?! dataset</a>, CVPR 2017', 
-          x: 1.5, y: 2.5, z: 0.2, style: 2017, filter:13 },
-        { text: '<b>Vision-and-Language Navigation</b><br><a href="https://bringmeaspoon.org/">Room-to-Room (R2R) dataset</a> (<a href="https://github.com/niessner/Matterport">Matterport3D</a>), CVPR 2018', 
-          x: 2.5, y: 1.5, z: 1.1, style: 2018, filter:14 },
-        { text: '<b>Embodied Question Answering</b><br><a href="https://embodiedqa.org/Interactive Question Answering">Embodied Question Answering dataset</a> (<a href="https://github.com/facebookresearch/House3D">House3D</a> / <a href="http://suncg.cs.princeton.edu/">SUNCG</a>), CVPR 2018', 
-          x: 2.5, y: 0.5, z: 1.1, style: 2018, filter:15 },
-        { text: '<b>Embodied Question Answering</b><br><a href="https://arxiv.org/abs/1712.03316">Interactive Question Answering (IQA) dataset</a> (<a href="https://ai2thor.allenai.org/">AI2-THOR</a>), CVPR 2018', 
-          x: 2.5, y: 0.5, z: 1.2, style: 2018, filter:16 },
+        { cat: 'Visual Question Answering', text:'VQA v2 dataset', conf:'CVPR 2017', 
+          url: 'http://www.visualqa.org/', 
+          x: 1.5, y: 1.5, z: 0.7, style: 2017, filter:11 },
+        { cat: 'Video Description', text: 'MPII Movie Description dataset', conf: 'CVPR 2015', 
+          url: 'https://www.mpi-inf.mpg.de/departments/computer-vision-and-multimodal-computing/research/vision-and-language/mpii-movie-description-dataset/',
+          x: 2.5, y: 1.5, z: 0.1, style: 2015, filter:7 },
+        { cat: 'Video Question Answering', text: 'Movie QA dataset', conf: 'CVPR 2016',
+          url: 'http://movieqa.cs.toronto.edu/home/',  
+          x: 2.5, y: 1.5, z: 0.2, style: 2016, filter:8 },
+        { cat: 'Video Description', text: 'MSR-VTT dataset', conf: 'CVPR 2016',
+          url: 'https://www.microsoft.com/en-us/research/publication/msr-vtt-a-large-video-description-dataset-for-bridging-video-and-language/',  
+          x: 2.5, y: 1.5, z: 0.3, style: 2016, filter:9 },
+        { cat: 'Image Captioning', text:'Abstract Scenes dataset', conf:'CVPR 2013',
+          url:'https://vision.ece.vt.edu/clipart/', 
+          x: 0.5, y: 1.5, z: 0.1, style: 2013, filter:2 },
+        { cat: 'Visual Question Answering', text: 'CLEVR dataset', conf:'CVPR 2017', 
+          url: 'https://cs.stanford.edu/people/jcjohns/clevr/',
+          x: 0.5, y: 0.5, z: 0.1, style: 2017, filter:12 },
+        { cat: 'Visual Dialog', text:'VisDial dataset', conf:'CVPR 2017', 
+          url: 'https://visualdialog.org/',
+          x: 1.5, y: 2.5, z: 0.1, style: 2017, filter:13 },
+        { cat: 'Visual Dialog', text: 'GuessWhat?! dataset', conf: 'CVPR 2017',
+          url: 'https://www.guesswhat.ai/',  
+          x: 1.5, y: 2.5, z: 0.2, style: 2017, filter:14 },
+        { cat: 'Vision-and-Language Navigation', text: 'Room-to-Room (R2R) dataset</a> (<a target="_blank" href="https://github.com/niessner/Matterport">Matterport3D</a>)', conf: 'CVPR 2018', 
+          url: 'https://bringmeaspoon.org/',
+          x: 2.5, y: 1.5, z: 1.1, style: 2018, filter:15 },
+        { cat: 'Embodied Question Answering', text: 'Embodied Question Answering dataset</a> (<a target="_blank" href="https://github.com/facebookresearch/House3D">House3D</a> / <a target="_blank" href="http://suncg.cs.princeton.edu/">SUNCG</a>)', conf: 'CVPR 2018',
+          url: 'https://embodiedqa.org/Interactive Question Answering', 
+          x: 2.5, y: 0.5, z: 1.1, style: 2018, filter:16 },
+        { cat: 'Embodied Question Answering', text: 'Interactive Question Answering (IQA) dataset</a> (<a target="_blank" href="https://ai2thor.allenai.org/">AI2-THOR</a>)', conf: 'CVPR 2018', 
+          url: 'https://arxiv.org/abs/1712.03316',
+          x: 2.5, y: 0.5, z: 1.2, style: 2018, filter:17 },
       ]
       
+      // Starting view and ending view
+      var text = '';
       for (var k = 0; k < dataArray.length; k++) {
-        item = dataArray[k];
-        for (var t = item.filter; t <= dataArray.length+1; t++) {
+        var item = dataArray[k];
+        if (k>0 && (dataArray[k-1].x != item.x || dataArray[k-1].y != item.y)) {
+          text = '';
+        }
+        if (text != '') { text = '<br>' + text; }
+        text = '<b>'+item.cat+':</b> <a target="_blank" href="'+item.url+'">'+item.text+'</a>, '+item.conf + text;
+        if (k+1<dataArray.length && (dataArray[k+1].x == item.x && dataArray[k+1].y == item.y)){
+          data.add([{x:item.x,y:item.y,z:item.z,filter:0,style:item.style,text:false, tooltip:t==item.filter}]);
+          data.add([{x:item.x,y:item.y,z:item.z,filter:dataArray.length+1,style:item.style,text:false, tooltip:t==item.filter}]);
+        } else {
+          data.add([{x:item.x,y:item.y,z:item.z,filter:0,style:item.style,text:text, tooltip:t==item.filter}]);
+          data.add([{x:item.x,y:item.y,z:item.z,filter:dataArray.length+1,style:item.style,text:text, tooltip:t==item.filter}]);
+        }
+      }
+      
+      for (var k = 0; k < dataArray.length; k++) {
+        var item = dataArray[k];
+        for (var t = item.filter; t <= dataArray.length; t++) {
+          var text = '<b>'+item.cat+'</b><br><a target="_blank" href="'+item.url+'">'+item.text+'</a>, '+item.conf;
           data.add([
-            {x:item.x,y:item.y,z:item.z,filter:t,style:item.style,text:item.text,tooltip:t==item.filter}
+            {x:item.x,y:item.y,z:item.z,filter:t,style:item.style,text:text, tooltip:t==item.filter}
           ]);
         }
       }
+      
 
       // specify options
       var options = {
@@ -73,10 +112,10 @@
         showPerspective: true,
         animationInterval: 1000, // milliseconds
         animationPreload: true,
-        animationAutoStart: true,
+        animationAutoStart: false,
         showGrid: true,
         keepAspectRatio: true,
-        verticalRatio: 0.66,
+        verticalRatio: 0.8,
         legendLabel: 'Year',
         cameraPosition: {
           horizontal: 0.65,
