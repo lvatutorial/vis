@@ -5,7 +5,7 @@
  * A dynamic, browser-based visualization library.
  *
  * @version 4.21.0
- * @date    2018-07-03
+ * @date    2018-07-04
  *
  * @license
  * Copyright (C) 2011-2017 Almende B.V, http://almende.com
@@ -36535,6 +36535,7 @@ Graph3d.prototype._onClick = function (event) {
  * @param {Event}  event   A mouse move event
  */
 Graph3d.prototype._onTooltip = function (event) {
+  return; // hack to disable tooltips on mouse
   var delay = 100; // ms
   var boundingRect = this.frame.getBoundingClientRect();
   var mouseX = getMouseX(event) - boundingRect.left;
